@@ -61,3 +61,7 @@ input {
   background-color: green;
   color: white;
 }
+.completed{
+  background: rgba(0,0,0,.1);
+  opacity: .5;
+}

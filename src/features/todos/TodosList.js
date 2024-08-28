@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import AddForm from "./AddForm";
 import {deleteTodo, getAllTodos, updateTodo} from "./todosSlice";
@@ -6,7 +6,11 @@ import {deleteTodo, getAllTodos, updateTodo} from "./todosSlice";
 function TodosList() {
 	const dispatch = useDispatch();
 	const todos = useSelector(getAllTodos);
+	const [complete, setComplete] = useState(false);
 
+	useEffect(() => {
+
+	}, []);
 	const handleDeleteTodo = (e, id) => {
 		e.preventDefault();
 		dispatch(deleteTodo(id));
@@ -14,16 +18,19 @@ function TodosList() {
 
 	const handleUpdateTodo = (e, id) => {
 		e.preventDefault();
-		dispatch(updateTodo(id));
-
+		dispatch(dispatch(updateTodo({id, completed: !todos.find(todo => todo.id === id).completed})));
 	}
 
 	const renderTodos = todos.map((todo) => {
 		return (
-			<div className={'todo'} key={todo.id}>
-				<p>{todo.title}</p>
-				<button className={'delete'} disabled={todo.complate} onClick={(e) => handleDeleteTodo(e, todo.id)}>delete</button>
-				<button className={'complete'}  onClick={(e) => handleUpdateTodo(e, todo.id)}>done</button>
+			<div key={todo.id} className={` ${todo.completed ? 'completed' : ''}`}>
+				<div className={'todo'} >
+					<p>{todo.title}</p>
+					<button className={'delete'} disabled={todo.completed}
+							onClick={(e) => handleDeleteTodo(e, todo.id)}>delete
+					</button>
+					<button className={'complete'} onClick={(e) => handleUpdateTodo(e, todo.id)}>done</button>
+				</div>
 			</div>
 		)
 	})

@@ -15,12 +15,11 @@ const todosSlice = createSlice({
 			state.todos = state.todos.filter((todo) => todo.id !== action.payload);
 		},
 		updateTodo: (state, action) => {
-			return state.todos.map((todo) => {
-				if (todo.id === action.payload) {
-					return { ...todo, complated: !todo.completed };
-				}
-				return todo;
-			});
+			const { id, completed } = action.payload;
+			const todoIndex = state.todos.findIndex((todo) => todo.id === id);
+			if (todoIndex !== -1) {
+				state.todos[todoIndex].completed = completed;
+			}
 		},
 	},
 });

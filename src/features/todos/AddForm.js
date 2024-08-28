@@ -12,9 +12,11 @@ function AddForm() {
 	}
 	const handleAddTodo = (e) => {
 		e.preventDefault();
-		dispatch(addTodo({id: nanoid(), title: todo, complete: false}));
-		setTodo('');
-	}
+		if (todo.trim()) { // Check if todo is not just whitespace
+			dispatch(addTodo({ id: nanoid(), title: todo, completed: false }));
+			setTodo('');
+		}
+	};
 
 	return (
 		<form action="" className={'add-todo-form'}>

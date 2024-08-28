@@ -6,7 +6,6 @@ import {deleteTodo, getAllTodos, updateTodo} from "./todosSlice";
 function TodosList() {
 	const dispatch = useDispatch();
 	const todos = useSelector(getAllTodos);
-	const [complete, setComplete] = useState(false);
 
 	useEffect(() => {
 

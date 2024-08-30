@@ -24,7 +24,7 @@ function TodosList() {
 
 	const renderTodos = todos.map((todo, index) => {
 		return (
-			<div key={todo.id} className={`container ${todo.completed ? 'completed' : ''}`}>
+			<div key={todo.id} className={`animate container ${todo.completed ? 'completed' : ''}`}>
 				<span className={'todo-number'}>{index + 1}</span>
 				<div className={'todo'} >
 					<p>{todo.title}</p>

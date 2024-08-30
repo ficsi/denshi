@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import AddForm from "./AddForm";
 import {deleteTodo, getAllTodos, updateTodo} from "./todosSlice";
+import './TodoList.scss';
+import './SingleTodo.scss';
 
 function TodosList() {
 	const dispatch = useDispatch();
@@ -20,9 +22,10 @@ function TodosList() {
 		dispatch(dispatch(updateTodo({id, completed: !todos.find(todo => todo.id === id).completed})));
 	}
 
-	const renderTodos = todos.map((todo) => {
+	const renderTodos = todos.map((todo, index) => {
 		return (
-			<div key={todo.id} className={` ${todo.completed ? 'completed' : ''}`}>
+			<div key={todo.id} className={`container ${todo.completed ? 'completed' : ''}`}>
+				<span className={'todo-number'}>{index + 1}</span>
 				<div className={'todo'} >
 					<p>{todo.title}</p>
 					<button className={'delete'} disabled={todo.completed}
@@ -36,9 +39,8 @@ function TodosList() {
 
 	return (
 		<>
-			<h1>TodosList</h1>
+			<h1>Tasks List</h1>
 			<AddForm/>
-			<hr/>
 			{renderTodos}
 		</>
 	)
